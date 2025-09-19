@@ -15,13 +15,15 @@ public class LaserDoJogador : MonoBehaviour
         transform.Translate(Vector3.up * velocidadeDoLaser * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) // <-- precisa do void
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.gameObject.CompareTag("LixoEspacial"))
         {
-            other.gameObject.GetComponent<LixoEspacial>().MachucarLixo(danoCausado); 
+            other.gameObject.GetComponent<LixoEspacial>().MachucarLixo(danoCausado);
             Destroy(this.gameObject);
         }
+
     }
 }
 

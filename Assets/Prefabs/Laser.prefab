@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -3.299, y: 0.2, z: 0}
-  m_LocalScale: {x: 0.000001, y: 0.008, z: 0.1}
+  m_LocalScale: {x: 0.001, y: 0.008, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -145,7 +145,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 1.0026505, y: 50.00004}
-  m_Size: {x: 0.0001, y: 101.999954}
+  m_Size: {x: 100, y: 101.999954}
   m_Direction: 0
 --- !u!114 &8730514292967807329
 MonoBehaviour:
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidadeDoLaser: 10
-  danoCausado: 1
+  danoCausado: 10
 --- !u!114 &2125760122823259330
 MonoBehaviour:
   m_ObjectHideFlags: 0

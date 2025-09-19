@@ -12,7 +12,7 @@ public class LixoEspacial : MonoBehaviour
 
     void Start()
     {
-
+        vidaAtualDoLixo = vidaMaximaDoLixo;
     }
 
     void Update()
