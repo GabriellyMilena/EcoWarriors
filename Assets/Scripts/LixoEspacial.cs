@@ -8,6 +8,8 @@ public class LixoEspacial : MonoBehaviour
     public int vidaMaximaDoLixo;
     public int vidaAtualDoLixo;
 
+    public int pontosPorLixo;
+
     public int danoCausado;
 
     void Start()
@@ -39,6 +41,7 @@ public class LixoEspacial : MonoBehaviour
         vidaAtualDoLixo -= danoParaCausar;
         if (vidaAtualDoLixo <= 0)
         {
+            GameManager.instancia.AumentarPontuacao(pontosPorLixo);
             Destroy(this.gameObject);
         }
     }
