@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VidaDoJogador : MonoBehaviour
 {
+
+    public Slider barraDeVida;
+
 
     public int vidaMaximaDoJogador;
     public int vidaAtualDoJogador;
@@ -13,6 +17,9 @@ public class VidaDoJogador : MonoBehaviour
     {
         vidaAtualDoJogador = vidaMaximaDoJogador;
         temEscudo = false;
+
+        barraDeVida.maxValue = vidaMaximaDoJogador;
+        barraDeVida.value = vidaAtualDoJogador;
     }
 
 
@@ -26,6 +33,8 @@ public class VidaDoJogador : MonoBehaviour
         if (temEscudo == false)
         {
             vidaAtualDoJogador -= danoParaReceber;
+            barraDeVida.value = vidaAtualDoJogador;
+
             if (vidaAtualDoJogador <= 0)
             {
                 Debug.Log("Game Over");
