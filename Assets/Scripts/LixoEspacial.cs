@@ -5,6 +5,9 @@ public class LixoEspacial : MonoBehaviour
     public GameObject impactoDoLixo;
     public float velocidadeDoLixo;
 
+    public GameObject itemDropado;
+    public int chanceDeDroparItem; // Porcentagem de chance de dropar o item (0-100)
+
     public int vidaMaximaDoLixo;
     public int vidaAtualDoLixo;
 
@@ -42,6 +45,14 @@ public class LixoEspacial : MonoBehaviour
         if (vidaAtualDoLixo <= 0)
         {
             GameManager.instancia.AumentarPontuacao(pontosPorLixo);
+
+            int numeroAleatorio = Random.Range(0, 100);
+
+            if (numeroAleatorio <= chanceDeDroparItem) //30% de chance de dropar o item
+            {
+                Instantiate(itemDropado, transform.position, Quaternion.Euler(0, 0, 0));
+            }
+
             Destroy(this.gameObject);
         }
     }
