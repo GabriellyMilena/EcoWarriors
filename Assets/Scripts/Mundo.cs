@@ -2,8 +2,19 @@ using UnityEngine;
 
 public class Terra : MonoBehaviour
 {
+    [Header("Configuração da Terra")]
+    [Tooltip("Velocidade de rotação da Terra (graus por segundo)")]
+    public float velocidadeRotacao = 5f;
+
+    [Header("Configuração do Jogador")]
     [Tooltip("Tag do jogador (normalmente 'Player')")]
     public string tagDoJogador = "Player";
+
+    private void Update()
+    {
+        // Faz a Terra girar no eixo Z
+        transform.Rotate(0, 0, velocidadeRotacao * Time.deltaTime);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
