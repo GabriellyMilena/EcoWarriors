@@ -5,6 +5,11 @@ public class LaserDoJogador : MonoBehaviour
     public float velocidadeDoLaser;
     public int danoCausado;
 
+
+    public GameObject impactoDoLaser;
+
+
+
     void Update()
     {
         Movimentarlaser();
@@ -21,6 +26,10 @@ public class LaserDoJogador : MonoBehaviour
         if (other.gameObject.CompareTag("LixoEspacial"))
         {
             other.gameObject.GetComponent<LixoEspacial>().MachucarLixo(danoCausado);
+
+            Instantiate(impactoDoLaser, transform.position, transform.rotation);
+            EfeitosSonoros.instancia.somDeImpacto.Play();
+
             Destroy(this.gameObject);
         }
 

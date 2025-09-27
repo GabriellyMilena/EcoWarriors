@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class LixoEspacial : MonoBehaviour
 {
+    //public GameObject colisaoDoLixo;
+
     public GameObject impactoDoLixo;
     public float velocidadeDoLixo;
 
@@ -35,6 +37,9 @@ public class LixoEspacial : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<VidaDoJogador>().ReceberDano(danoCausado);
+            Instantiate(impactoDoLixo, transform.position, transform.rotation);
+
+            EfeitosSonoros.instancia.somExplosao.Play();
             Destroy(this.gameObject);
         }
     }
@@ -45,6 +50,10 @@ public class LixoEspacial : MonoBehaviour
         if (vidaAtualDoLixo <= 0)
         {
             GameManager.instancia.AumentarPontuacao(pontosPorLixo);
+
+            //Instantiate(impactoDoLixo, transform.position, transform.rotation);
+
+            EfeitosSonoros.instancia.somExplosao.Play();
 
             int numeroAleatorio = Random.Range(0, 100);
 
@@ -57,3 +66,4 @@ public class LixoEspacial : MonoBehaviour
         }
     }
 }
+

@@ -161,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeDoLaser: 15
   danoCausado: 10
+  impactoDoLaser: {fileID: 2258686626628890455, guid: b3c43be41971ddb438d10072b6b3f1d1, type: 3}
 --- !u!114 &2125760122823259330
 MonoBehaviour:
   m_ObjectHideFlags: 0

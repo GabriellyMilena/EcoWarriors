@@ -35,10 +35,13 @@ public class ControleDoJogador : MonoBehaviour
 
     private void Atirar()
     {
-        if (Input.GetButtonDown("Fire1")) {
-            if (temLaserDuplo == false) {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (temLaserDuplo == false)
+            {
                 Instantiate(laserDoJogador, localDeDisparoUnico.position, localDeDisparoUnico.rotation);
             }
+            EfeitosSonoros.instancia.somDoLaser.Play();
         }
     }
 }
