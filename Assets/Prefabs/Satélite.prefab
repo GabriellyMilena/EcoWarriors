@@ -85,7 +85,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 259102323
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300016, guid: ea47199b715e6c047909c1486562c340, type: 3}
   m_Color: {r: 0.6839622, g: 0.9430563, b: 1, a: 1}
   m_FlipX: 0
@@ -424,7 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ac131a47f564345a1aa1ff32b32098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colisaoDoLixo: {fileID: 5100528553922600576, guid: 887c7cc41a3da574d9ea99d30a7550f6, type: 3}
   impactoDoLixo: {fileID: 5100528553922600576, guid: 887c7cc41a3da574d9ea99d30a7550f6, type: 3}
   velocidadeDoLixo: 15
   itemDropado: {fileID: 3232363289026165087, guid: 83cbbce36e14f7346ad69307ee0db2c6, type: 3}

@@ -4,18 +4,17 @@ public class LixoEspacial : MonoBehaviour
 {
     //public GameObject colisaoDoLixo;
 
-    public GameObject impactoDoLixo;
+    [Header("Configurações do Lixo")]
     public float velocidadeDoLixo;
-
-    public GameObject itemDropado;
-    public int chanceDeDroparItem; // Porcentagem de chance de dropar o item (0-100)
-
     public int vidaMaximaDoLixo;
     public int vidaAtualDoLixo;
-
     public int pontosPorLixo;
-
     public int danoCausado;
+
+    [Header("Itens e Efeitos")]
+    public GameObject impactoDoLixo;
+    public GameObject itemDropado;
+    public int chanceDeDroparItem; // Porcentagem de chance de dropar o item (0-100)
 
     void Start()
     {
@@ -37,7 +36,11 @@ public class LixoEspacial : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<VidaDoJogador>().ReceberDano(danoCausado);
-            Instantiate(impactoDoLixo, transform.position, transform.rotation);
+
+            // Explosão na frente do lixo
+            GameObject explosao = Instantiate(impactoDoLixo, transform.position, transform.rotation);
+            SpriteRenderer sr = explosao.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.sortingOrder = 1;
 
             EfeitosSonoros.instancia.somExplosao.Play();
             Destroy(this.gameObject);
@@ -51,19 +54,21 @@ public class LixoEspacial : MonoBehaviour
         {
             GameManager.instancia.AumentarPontuacao(pontosPorLixo);
 
-            //Instantiate(impactoDoLixo, transform.position, transform.rotation);
+            // Explosão na frente do lixo
+            GameObject explosao = Instantiate(impactoDoLixo, transform.position, transform.rotation);
+            SpriteRenderer sr = explosao.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.sortingOrder = 1;
 
             EfeitosSonoros.instancia.somExplosao.Play();
 
+            // Chance de dropar item
             int numeroAleatorio = Random.Range(0, 100);
-
-            if (numeroAleatorio <= chanceDeDroparItem) //30% de chance de dropar o item
+            if (numeroAleatorio <= chanceDeDroparItem)
             {
-                Instantiate(itemDropado, transform.position, Quaternion.Euler(0, 0, 0));
+                Instantiate(itemDropado, transform.position, Quaternion.identity);
             }
 
             Destroy(this.gameObject);
         }
     }
 }
-
