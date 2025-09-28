@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class LixoEspacial : MonoBehaviour
 {
-    //public GameObject colisaoDoLixo;
-
     [Header("Configurações do Lixo")]
     public float velocidadeDoLixo;
     public int vidaMaximaDoLixo;
@@ -36,12 +34,7 @@ public class LixoEspacial : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<VidaDoJogador>().ReceberDano(danoCausado);
-
-            // Explosão na frente do lixo
-            GameObject explosao = Instantiate(impactoDoLixo, transform.position, transform.rotation);
-            SpriteRenderer sr = explosao.GetComponent<SpriteRenderer>();
-            if (sr != null) sr.sortingOrder = 1;
-
+            CriarExplosao();
             EfeitosSonoros.instancia.somExplosao.Play();
             Destroy(this.gameObject);
         }
@@ -54,21 +47,26 @@ public class LixoEspacial : MonoBehaviour
         {
             GameManager.instancia.AumentarPontuacao(pontosPorLixo);
 
-            // Explosão na frente do lixo
-            GameObject explosao = Instantiate(impactoDoLixo, transform.position, transform.rotation);
-            SpriteRenderer sr = explosao.GetComponent<SpriteRenderer>();
-            if (sr != null) sr.sortingOrder = 1;
-
+            CriarExplosao();
             EfeitosSonoros.instancia.somExplosao.Play();
 
             // Chance de dropar item
-            int numeroAleatorio = Random.Range(0, 100);
-            if (numeroAleatorio <= chanceDeDroparItem)
+            if (Random.Range(0, 100) <= chanceDeDroparItem)
             {
                 Instantiate(itemDropado, transform.position, Quaternion.identity);
             }
 
             Destroy(this.gameObject);
         }
+    }
+
+    // Método privado para instanciar a explosão na frente do lixo
+    private void CriarExplosao()
+    {
+        if (impactoDoLixo == null) return;
+
+        GameObject explosao = Instantiate(impactoDoLixo, transform.position, transform.rotation);
+        SpriteRenderer sr = explosao.GetComponent<SpriteRenderer>();
+        if (sr != null) sr.sortingOrder = 1; // Garante que a explosão fique na frente do lixo
     }
 }

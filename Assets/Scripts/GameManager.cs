@@ -5,18 +5,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instancia;
 
+    [Header("Áudio")]
     public AudioSource musicaDeFundo;
     public AudioSource musicaDeGameOver;
 
-    public Text textoDePontuacao;
+    [Header("Pontuação")]
+    public Text textoDePontuacao;      
     public int PontuacaoAtual;
 
+    [Header("Game Over")]
     public GameObject painelDeGameOver;
     public Text textoDeGameOver;      
     public Text textoDePontuacaoFinal;
     public Text textoDeHighScore;
 
-    public GameObject jogador; // Referência ao Player
+    [Header("Player")]
+    public GameObject jogador;
 
     void Awake()
     {
@@ -28,37 +32,33 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         musicaDeFundo.Play();
 
-        textoDePontuacao.text = "PONTUAÇÃO: " + PontuacaoAtual;
+        AtualizarTextoPontuacao();
     }
 
     public void AumentarPontuacao(int pontosParaGanhar)
     {
         PontuacaoAtual += pontosParaGanhar;
-        textoDePontuacao.text = "PONTUAÇÃO: " + PontuacaoAtual;
+        AtualizarTextoPontuacao();
+    }
+
+    private void AtualizarTextoPontuacao()
+    {
+        if (textoDePontuacao != null)
+            textoDePontuacao.text = "PONTUAÇÃO: " + PontuacaoAtual;
     }
 
     public void GameOver()
     {
-        // Pausa
         Time.timeScale = 0;
 
-        // Música
-        musicaDeFundo.Stop();
-        musicaDeGameOver.Play();
+        if (musicaDeFundo != null) musicaDeFundo.Stop();
+        if (musicaDeGameOver != null) musicaDeGameOver.Play();
 
-        // Desativa player
-        if (jogador != null)
-            jogador.SetActive(false);
+        if (jogador != null) jogador.SetActive(false);
 
-        // Texto fixo do título
-        if (textoDeGameOver != null)
-            textoDeGameOver.text = "GAME OVER";
+        if (textoDeGameOver != null) textoDeGameOver.text = "GAME OVER";
+        if (textoDePontuacaoFinal != null) textoDePontuacaoFinal.text = "PONTUAÇÃO: " + PontuacaoAtual;
 
-        // Pontuação final
-        if (textoDePontuacaoFinal != null)
-            textoDePontuacaoFinal.text = "PONTUAÇÃO: " + PontuacaoAtual;
-
-        // HighScore
         int highScore = PlayerPrefs.GetInt("HighScore", 0);
         if (PontuacaoAtual > highScore)
         {
@@ -67,11 +67,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        if (textoDeHighScore != null)
-            textoDeHighScore.text = "MELHOR PONTUAÇÃO: " + highScore;
-
-        // Ativa painel
-        if (painelDeGameOver != null)
-            painelDeGameOver.SetActive(true);
-    }  
+        if (textoDeHighScore != null) textoDeHighScore.text = "MELHOR PONTUAÇÃO: " + highScore;
+        if (painelDeGameOver != null) painelDeGameOver.SetActive(true);
+    }
 }
