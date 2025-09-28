@@ -3,85 +3,76 @@ using UnityEngine.UI;
 
 public class VidaDoJogador : MonoBehaviour
 {
-
+    [Header("UI")]
     public Slider barraDeVida;
-
     public Slider barraDeEscudo;
 
+    [Header("Escudo")]
     public GameObject escudoDoJogador;
-
-
-    public int vidaMaximaDoJogador;
-    public int vidaAtualDoJogador;
-
     public int vidaMaximaDoEscudo;
-    public int vidaAtualDoEscudo;
+    private int vidaAtualDoEscudo;
+    private bool temEscudo = false;
 
-    public bool temEscudo;
-
+    [Header("Jogador")]
+    public int vidaMaximaDoJogador;
+    private int vidaAtualDoJogador;
 
     void Start()
     {
+        // Inicializa vida
         vidaAtualDoJogador = vidaMaximaDoJogador;
-        temEscudo = false;
-
         barraDeVida.maxValue = vidaMaximaDoJogador;
         barraDeVida.value = vidaAtualDoJogador;
 
+        // Inicializa escudo
+        vidaAtualDoEscudo = vidaMaximaDoEscudo;
         barraDeEscudo.maxValue = vidaMaximaDoEscudo;
         barraDeEscudo.value = vidaAtualDoEscudo;
-
-        //barraDeEscudo.gameObject.SetActive(false);
 
         escudoDoJogador.SetActive(false);
         temEscudo = false;
     }
 
-
-    void Update()
-    {
-
-    }
-
-
     public void AtivarEscudo()
     {
-
-        //barraDeEscudo.gameObject.SetActive(true);
-
         vidaAtualDoEscudo = vidaMaximaDoEscudo;
-
         barraDeEscudo.value = vidaAtualDoEscudo;
 
         escudoDoJogador.SetActive(true);
         temEscudo = true;
     }
 
-    public void ReceberDano(int danoParaReceber)
+    public void ReceberDano(int dano)
     {
-        if (temEscudo == false)
+        if (temEscudo)
         {
-            vidaAtualDoJogador -= danoParaReceber;
-            barraDeVida.value = vidaAtualDoJogador;
-
-            if (vidaAtualDoJogador <= 0)
-            {
-                GameManager.instancia.GameOver();
-
-                Debug.Log("Game Over");
-            }
-        }else
-        {
-            vidaAtualDoEscudo -= danoParaReceber;
+            vidaAtualDoEscudo -= dano;
             barraDeEscudo.value = vidaAtualDoEscudo;
+
             if (vidaAtualDoEscudo <= 0)
             {
                 temEscudo = false;
                 escudoDoJogador.SetActive(false);
+                vidaAtualDoEscudo = 0;
+                barraDeEscudo.value = vidaAtualDoEscudo;
+            }
+        }
+        else
+        {
+            vidaAtualDoJogador -= dano;
+            barraDeVida.value = vidaAtualDoJogador;
 
-                //barraDeEscudo.gameObject.SetActive(false);
+            if (vidaAtualDoJogador <= 0)
+            {
+                vidaAtualDoJogador = 0;
+                barraDeVida.value = 0;
 
+                ControleDoJogador jogador = FindObjectOfType<ControleDoJogador>();
+                if (jogador != null) jogador.jogadorVivo = false;
 
+                if (GameManager.instancia != null) GameManager.instancia.GameOver();
+
+                Debug.Log("Game Over");
             }
         }
     }
