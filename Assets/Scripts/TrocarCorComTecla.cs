@@ -19,7 +19,8 @@ public class TrocaSpriteComTecla : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        // Teclado (C) ou controle (Botão B)
+        if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1))
         {
             indiceAtual = (indiceAtual + 1) % navesColoridas.Length;
             AtivarNave(indiceAtual);
