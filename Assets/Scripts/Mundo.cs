@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Terra : MonoBehaviour
+public class Mundo : MonoBehaviour
 {
     [Header("Configuração da Terra")]
     [Tooltip("Velocidade de rotação da Terra (graus por segundo)")]
