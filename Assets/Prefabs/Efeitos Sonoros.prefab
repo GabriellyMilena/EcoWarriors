@@ -396,7 +396,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3266448691318460312}
-  - component: {fileID: 2986823359646340479}
   m_Layer: 0
   m_Name: Efeitos Sonoros
   m_TagString: Untagged
@@ -422,18 +421,3 @@ Transform:
   - {fileID: 6683892247141236096}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2986823359646340479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8449853676832917387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e02f6621781533640bc3c95c0f4448f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  somExplosao: {fileID: 3390780849836350173}
-  somDoLaser: {fileID: 5530166524972293611}
-  somDeImpacto: {fileID: 2338615647414891413}

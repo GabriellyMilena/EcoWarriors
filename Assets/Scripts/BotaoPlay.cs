@@ -7,7 +7,7 @@ public class TrocaDeCena : MonoBehaviour
     public void CarregarJogo()
     {
         Debug.Log("CarregarJogo foi chamado!");
-        SceneManager.LoadScene("Jogo"); // Nome da cena deve ser igual ao que está no Project
+        SceneManager.LoadScene("Dialogo"); // Nome da cena deve ser igual ao que está no Project
     }
 
     // Carrega o menu principal

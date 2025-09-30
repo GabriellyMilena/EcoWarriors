@@ -10,7 +10,8 @@ public class PainelGameOver : MonoBehaviour
     public void ReiniciarJogo()
     {
         Time.timeScale = 1; // Garante que o tempo volte ao normal
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Dialogo");
+
     }
 
     // Sai do jogo e reseta o highscore
