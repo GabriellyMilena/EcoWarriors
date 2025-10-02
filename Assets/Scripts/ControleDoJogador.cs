@@ -34,6 +34,10 @@ public class ControleDoJogador : MonoBehaviour
 
     private void Atirar()
     {
+        // Fire1 está mapeado por padrão para:
+        // - Teclado: Ctrl esquerdo / mouse esquerdo
+        // - Xbox: A
+        // - PlayStation: X (cruz)
         if (Input.GetButtonDown("Fire1"))
         {
             if (!temLaserDuplo)

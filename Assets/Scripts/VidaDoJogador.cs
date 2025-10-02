@@ -24,11 +24,10 @@ public class VidaDoJogador : MonoBehaviour
         barraDeVida.maxValue = vidaMaximaDoJogador;
         barraDeVida.value = vidaAtualDoJogador;
 
-        // Inicializa escudo
-        vidaAtualDoEscudo = vidaMaximaDoEscudo;
+        // Inicializa escudo vazio (sem escudo no começo)
         barraDeEscudo.maxValue = vidaMaximaDoEscudo;
-        barraDeEscudo.value = vidaAtualDoEscudo;
-
+        vidaAtualDoEscudo = 0;
+        barraDeEscudo.value = 0;
         escudoDoJogador.SetActive(false);
         temEscudo = false;
     }

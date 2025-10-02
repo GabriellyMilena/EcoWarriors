@@ -1,23 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem; // Novo Input System
 
 public class DialogoController : MonoBehaviour
 {
     public Text caixaDeTexto;
+
     private string[] falas = new string[]
     {
-        "A Terra enfrenta um grave perigo: o lixo espacial!",
-        "Satélites quebrados e toneladas de sucata ameaçam missões e a vida no planeta.",
-        "Para salvar o futuro, criamos a Nave Ecológica, capaz de reciclar e destruir os detritos em órbita.",
+        "A Terra está em perigo: o lixo espacial se acumula em órbita!",
+        "Satélites quebrados e toneladas de sucata ameaçam missões e até mesmo a vida no planeta.",
+        "Para salvar o futuro, foi criada a Nave Ecológica: capaz de reciclar e destruir os detritos espaciais.",
         "Sua missão é clara: proteger a Terra e restaurar o equilíbrio ambiental.",
-        "Use WASD para se mover e o mouse para atirar.",
-        "Além disso, a nave possui um sistema inteligente que permite mudar sua cor. Para ativá-lo, aperte C.",
-        "Além disso, a nave possui um escudo. Basta pegar o item de escudo que aparece de vez em quando.",
-        "Se você colidir com o lixo espacial, perderá vida. Cuidado!",
-        "Boa sorte, herói!"
+        "Use o analógico esquerdo para mover a nave.",
+        "Aperte X para disparar.",
+        "Aperte O para mudar a cor da nave.",
+        "Recolha o item de escudo quando aparecer para se proteger dos impactos.",
+        "Se colidir com o lixo espacial, perderá vida. Fique atento!",
+        "Boa sorte, herói. O planeta conta com você!"
     };
-
 
     private int indice = 0;
 
@@ -26,7 +28,22 @@ public class DialogoController : MonoBehaviour
         caixaDeTexto.text = falas[indice];
     }
 
-    public void ProximoDialogo()
+    void Update()
+    {
+        var gamepad = Gamepad.current;
+        if (gamepad != null && gamepad.buttonSouth.wasPressedThisFrame) // X no PlayStation / A no Xbox
+        {
+            ProximoDialogo();
+        }
+
+        // Para quem estiver testando no PC sem controle:
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ProximoDialogo();
+        }
+    }
+
+    private void ProximoDialogo()
     {
         indice++;
         if (indice < falas.Length)
@@ -35,8 +52,7 @@ public class DialogoController : MonoBehaviour
         }
         else
         {
-            // quando terminar o diálogo, abre a cena de jogo
-            SceneManager.LoadScene("Jogo");
+            SceneManager.LoadScene("Jogo"); // Vai para a cena do jogo
         }
     }
 }

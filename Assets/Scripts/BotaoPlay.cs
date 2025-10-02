@@ -3,24 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class TrocaDeCena : MonoBehaviour
 {
-    // Carrega a cena do jogo
-    public void CarregarJogo()
+    void Update()
     {
-        Debug.Log("CarregarJogo foi chamado!");
-        SceneManager.LoadScene("Dialogo"); // Nome da cena deve ser igual ao que está no Project
-    }
+        // Carregar jogo: X do PS / A do Xbox / clique esquerdo do mouse
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Botão X ou clique esquerdo pressionado - Carregar jogo!");
+            SceneManager.LoadScene("Dialogo");
+        }
 
-    // Carrega o menu principal
-    public void CarregarMenu()
-    {
-        Debug.Log("CarregarMenu foi chamado!");
-        SceneManager.LoadScene("Menu"); // Nome da cena do menu
-    }
-
-    // Fecha o jogo (funciona em build, não no editor)
-    public void SairDoJogo()
-    {
-        Debug.Log("Sair do jogo foi chamado!");
-        Application.Quit();
+        // Sair do jogo: O do PS / B do Xbox / clique direito do mouse
+        // Garantindo que só seja executado quando realmente apertado
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) || (Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(0)))
+        {
+            Debug.Log("Botão O ou clique direito pressionado - Sair do jogo!");
+            Application.Quit();
+        }
     }
 }

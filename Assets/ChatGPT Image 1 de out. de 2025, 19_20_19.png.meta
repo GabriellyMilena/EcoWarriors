@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 351f0663dec64d44bb83628fad33c202
+guid: d61fb7dc6437c064e89e29517e282006
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5136201132499132657
-    second: Captura de tela 2025-09-30 164525_0
+      213: -8074816857509767514
+    second: ChatGPT Image 1 de out. de 2025, 19_20_19_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Captura de tela 2025-09-30 164525_0
+      name: ChatGPT Image 1 de out. de 2025, 19_20_19_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 243
-        height: 188
+        width: 1024
+        height: 1536
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0f1e62684c88b8b0800000000000000
-      internalID: -5136201132499132657
+      spriteID: 6a65bcda9dc70ff80800000000000000
+      internalID: -8074816857509767514
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Captura de tela 2025-09-30 164525_0: -5136201132499132657
+      ChatGPT Image 1 de out. de 2025, 19_20_19_0: -8074816857509767514
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
