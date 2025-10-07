@@ -14,8 +14,8 @@ public class DialogoController : MonoBehaviour
         "Para salvar o futuro, foi criada a Nave Ecológica: capaz de reciclar e destruir os detritos espaciais.",
         "Sua missão é clara: proteger a Terra e restaurar o equilíbrio ambiental.",
         "Use o analógico esquerdo para mover a nave.",
-        "Aperte X para disparar.",
-        "Aperte O para mudar a cor da nave.",
+        "Aperte A para disparar.",
+        "Aperte B para mudar a cor da nave.",
         "Recolha o item de escudo quando aparecer para se proteger dos impactos.",
         "Se colidir com o lixo espacial, perderá vida. Fique atento!",
         "Boa sorte, herói. O planeta conta com você!"

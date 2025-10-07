@@ -1,54 +1,101 @@
-using UnityEngine;
+using UnityEngine; // Biblioteca principal do Unity. 
 
-public class ControleDoJogador : MonoBehaviour
-{
-    [Header("Componentes")]
-    public Rigidbody2D oRigidbody2D;
+ 
 
-    [Header("Disparo")]
-    public GameObject laserDoJogador;
-    public Transform localDeDisparoUnico;
-    public bool temLaserDuplo = false;
+public class ControleDoJogador : MonoBehaviour // Classe que controla o jogador (nave). 
 
-    [Header("Movimento")]
-    public float velocidadeDaNave;
+{ 
 
-    [Header("Status")]
-    public bool jogadorVivo = true;
+    public Rigidbody2D oRigidbody2D;  
 
-    private Vector2 teclasApertadas;
+    // Componente de física 2D usado para movimentar a nave de forma suave. 
 
-    void Update()
-    {
-        if (!jogadorVivo) return;
+ 
+    public GameObject laserDoJogador; // Prefab do laser que será disparado. 
 
-        MovimentarJogador();
-        Atirar();
-    }
+    public Transform localDeDisparoUnico; // Local onde o laser será instanciado (na ponta da nave, por exemplo). 
 
-    private void MovimentarJogador()
-    {
-        teclasApertadas = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        oRigidbody2D.linearVelocity = teclasApertadas.normalized * velocidadeDaNave;
-    }
+    public bool temLaserDuplo = false; // Variável para ativar/desativar o modo de disparo duplo. 
 
-    private void Atirar()
-    {
-        // Fire1 está mapeado por padrão para:
-        // - Teclado: Ctrl esquerdo / mouse esquerdo
-        // - Xbox: A
-        // - PlayStation: X (cruz)
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (!temLaserDuplo)
-            {
-                Instantiate(laserDoJogador, localDeDisparoUnico.position, localDeDisparoUnico.rotation);
-            }
+    public float velocidadeDaNave; // Define a velocidade de movimento da nave. 
 
-            if (EfeitosSonoros.instancia != null && EfeitosSonoros.instancia.somDoLaser != null)
-            {
-                EfeitosSonoros.instancia.somDoLaser.Play();
-            }
-        }
-    }
-}
+
+    public bool jogadorVivo = true; // Controla se o jogador ainda está vivo (quando false, desativa o controle). 
+
+ 
+
+    private Vector2 teclasApertadas; // Guarda a direção das teclas pressionadas. 
+
+ 
+
+    void Update() // Chamado a cada frame. 
+
+    { 
+
+        if (!jogadorVivo) return; // Se o jogador estiver "morto", não executa nada. 
+
+ 
+
+        MovimentarJogador(); // Controla o movimento. 
+
+        Atirar(); // Controla o disparo. 
+
+    } 
+
+ 
+
+    private void MovimentarJogador() 
+
+    { 
+
+        // Pega as teclas de movimento (setas ou WASD). 
+
+        teclasApertadas = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); 
+
+ 
+
+        // Move a nave de acordo com a direção das teclas, normalizando a velocidade. 
+
+        oRigidbody2D.linearVelocity = teclasApertadas.normalized * velocidadeDaNave; 
+
+    } 
+
+ 
+
+    private void Atirar() 
+
+    { 
+
+        // Se o jogador apertar o botão de disparo (padrão: Ctrl esquerdo, mouse esquerdo ou botão "X" no joystick). 
+
+        if (Input.GetButtonDown("Fire1")) 
+
+        { 
+
+            // Caso NÃO tenha o disparo duplo, instancia apenas 1 laser. 
+
+            if (!temLaserDuplo) 
+
+            { 
+
+                Instantiate(laserDoJogador, localDeDisparoUnico.position, localDeDisparoUnico.rotation); 
+
+            } 
+
+ 
+
+            // Se o gerenciador de efeitos sonoros existir e tiver som de laser, toca o áudio. 
+
+            if (EfeitosSonoros.instancia != null && EfeitosSonoros.instancia.somDoLaser != null) 
+
+            { 
+
+                EfeitosSonoros.instancia.somDoLaser.Play(); 
+
+            } 
+
+        } 
+
+    } 
+
+} 
