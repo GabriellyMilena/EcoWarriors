@@ -1,4 +1,6 @@
 using UnityEngine;
+using VolumetricLines;
+
 
 public class LaserDoJogador : MonoBehaviour
 {
@@ -10,14 +12,17 @@ public class LaserDoJogador : MonoBehaviour
     public GameObject impactoDoLaser;
 
     [Header("Componentes Internos")]
-    private SpriteRenderer rend; // melhor para jogos 2D
+    private SpriteRenderer rend; 
+    private VolumetricLineBehavior volumetricLine; // 👈 compatibilidade com seu prefab
 
     void Awake()
     {
         rend = GetComponent<SpriteRenderer>();
-        if (rend == null)
+        volumetricLine = GetComponent<VolumetricLineBehavior>(); // 👈 tenta encontrar o componente do laser 3D
+
+        if (rend == null && volumetricLine == null)
         {
-            Debug.LogWarning("⚠️ Nenhum SpriteRenderer encontrado no laser — ele pode ficar invisível.");
+            Debug.LogWarning("⚠️ Nenhum componente visual encontrado (nem SpriteRenderer nem VolumetricLineBehavior).");
         }
     }
 
@@ -26,14 +31,14 @@ public class LaserDoJogador : MonoBehaviour
         // Movimento contínuo do laser
         transform.Translate(Vector3.up * velocidadeDoLaser * Time.deltaTime);
 
-        // Destruição automática fora da tela (boa prática)
+        // Destruição automática fora da tela
         if (transform.position.y > Camera.main.orthographicSize * 1.5f)
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) // ✅ versão 2D correta
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("LixoEspacial"))
         {
@@ -57,12 +62,19 @@ public class LaserDoJogador : MonoBehaviour
         }
     }
 
-    // Permite mudar a cor do laser dinamicamente (para o script DisparoDoJogador)
+    // ✅ Compatível com SpriteRenderer e VolumetricLineBehavior
     public void DefinirCor(Color cor)
     {
         if (rend != null && rend.material != null)
         {
             rend.material.color = cor;
         }
+
+        if (volumetricLine != null)
+        {
+            volumetricLine.LineColor = cor; // 👈 o campo correto para alterar cor no laser volumétrico
+        }
+
+        Debug.Log("Cor do laser aplicada visualmente: " + cor);
     }
 }

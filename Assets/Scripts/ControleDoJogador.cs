@@ -1,101 +1,96 @@
-using UnityEngine; // Biblioteca principal do Unity. 
+using UnityEngine; // Biblioteca principal do Unity.
 
- 
+public class ControleDoJogador : MonoBehaviour // Classe que controla o jogador (nave).
+{
+    [Header("Configurações de Cor")]
+    public Color corAtual = Color.white; // Cor inicial do laser
 
-public class ControleDoJogador : MonoBehaviour // Classe que controla o jogador (nave). 
+    [Header("Componentes Principais")]
+    public Rigidbody2D oRigidbody2D;
+    public GameObject laserDoJogador; // Prefab do laser
+    public Transform localDeDisparoUnico; // Posição de disparo
 
-{ 
+    [Header("Configurações de Jogo")]
+    public bool temLaserDuplo = false;
+    public float velocidadeDaNave = 5f;
+    public bool jogadorVivo = true;
 
-    public Rigidbody2D oRigidbody2D;  
+    private Vector2 teclasApertadas; // Direção de movimento
 
-    // Componente de física 2D usado para movimentar a nave de forma suave. 
+    void Update()
+    {
+        if (!jogadorVivo) return;
 
- 
-    public GameObject laserDoJogador; // Prefab do laser que será disparado. 
+        MovimentarJogador();
+        TrocarCor();
+        Atirar();
+    }
 
-    public Transform localDeDisparoUnico; // Local onde o laser será instanciado (na ponta da nave, por exemplo). 
+    private void MovimentarJogador()
+    {
+        teclasApertadas = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        oRigidbody2D.linearVelocity = teclasApertadas.normalized * velocidadeDaNave;
+    }
 
-    public bool temLaserDuplo = false; // Variável para ativar/desativar o modo de disparo duplo. 
+    // ✅ Controle de troca de cor via teclado ou controle
+    private void TrocarCor()
+    {
+        // Troca de cor com teclado (1, 2, 3)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            corAtual = Color.red;
+            Debug.Log("Cor do laser alterada para: Vermelho");
+        }
 
-    public float velocidadeDaNave; // Define a velocidade de movimento da nave. 
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            corAtual = Color.green;
+            Debug.Log("Cor do laser alterada para: Verde");
+        }
 
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            corAtual = Color.blue;
+            Debug.Log("Cor do laser alterada para: Azul");
+        }
 
-    public bool jogadorVivo = true; // Controla se o jogador ainda está vivo (quando false, desativa o controle). 
+        // Troca de cor via joystick (A, B, X)
+        if (Input.GetButtonDown("Fire2")) // A
+        {
+            corAtual = Color.red;
+            Debug.Log("Cor do laser alterada via controle: Vermelho");
+        }
+        if (Input.GetButtonDown("Fire3")) // B
+        {
+            corAtual = Color.green;
+            Debug.Log("Cor do laser alterada via controle: Verde");
+        }
+        if (Input.GetButtonDown("Jump")) // X
+        {
+            corAtual = Color.blue;
+            Debug.Log("Cor do laser alterada via controle: Azul");
+        }
+    }
 
- 
+    private void Atirar()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            // Instancia o laser
+            GameObject novoLaser = Instantiate(laserDoJogador, localDeDisparoUnico.position, localDeDisparoUnico.rotation);
 
-    private Vector2 teclasApertadas; // Guarda a direção das teclas pressionadas. 
+            // Aplica a cor atual no laser
+            LaserDoJogador scriptLaser = novoLaser.GetComponent<LaserDoJogador>();
+            if (scriptLaser != null)
+            {
+                scriptLaser.DefinirCor(corAtual);
+            }
 
- 
-
-    void Update() // Chamado a cada frame. 
-
-    { 
-
-        if (!jogadorVivo) return; // Se o jogador estiver "morto", não executa nada. 
-
- 
-
-        MovimentarJogador(); // Controla o movimento. 
-
-        Atirar(); // Controla o disparo. 
-
-    } 
-
- 
-
-    private void MovimentarJogador() 
-
-    { 
-
-        // Pega as teclas de movimento (setas ou WASD). 
-
-        teclasApertadas = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); 
-
- 
-
-        // Move a nave de acordo com a direção das teclas, normalizando a velocidade. 
-
-        oRigidbody2D.linearVelocity = teclasApertadas.normalized * velocidadeDaNave; 
-
-    } 
-
- 
-
-    private void Atirar() 
-
-    { 
-
-        // Se o jogador apertar o botão de disparo (padrão: Ctrl esquerdo, mouse esquerdo ou botão "X" no joystick). 
-
-        if (Input.GetButtonDown("Fire1")) 
-
-        { 
-
-            // Caso NÃO tenha o disparo duplo, instancia apenas 1 laser. 
-
-            if (!temLaserDuplo) 
-
-            { 
-
-                Instantiate(laserDoJogador, localDeDisparoUnico.position, localDeDisparoUnico.rotation); 
-
-            } 
-
- 
-
-            // Se o gerenciador de efeitos sonoros existir e tiver som de laser, toca o áudio. 
-
-            if (EfeitosSonoros.instancia != null && EfeitosSonoros.instancia.somDoLaser != null) 
-
-            { 
-
-                EfeitosSonoros.instancia.somDoLaser.Play(); 
-
-            } 
-
-        } 
-
-    } 
-
-} 
+            // Som do disparo (mantido)
+            if (EfeitosSonoros.instancia != null && EfeitosSonoros.instancia.somDoLaser != null)
+            {
+                EfeitosSonoros.instancia.somDoLaser.Play();
+            }
+        }
+    }
+}

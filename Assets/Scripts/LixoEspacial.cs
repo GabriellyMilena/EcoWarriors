@@ -9,14 +9,22 @@ public class LixoEspacial : MonoBehaviour
     public int pontosPorLixo;
     public int danoCausado;
 
+    [Header("Sistema Cromático")]
+    public Color corDoLixo = Color.white; // 🔹 Adicionado
+
     [Header("Itens e Efeitos")]
     public GameObject impactoDoLixo;
     public GameObject itemDropado;
-    public int chanceDeDroparItem; // Porcentagem de chance de dropar o item (0-100)
+    public int chanceDeDroparItem;
 
     void Start()
     {
         vidaAtualDoLixo = vidaMaximaDoLixo;
+
+        // Aplica a cor no sprite do inimigo
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+            sr.color = corDoLixo;
     }
 
     void Update()
@@ -46,11 +54,9 @@ public class LixoEspacial : MonoBehaviour
         if (vidaAtualDoLixo <= 0)
         {
             GameManager.instancia.AumentarPontuacao(pontosPorLixo);
-
             CriarExplosao();
             EfeitosSonoros.instancia.somExplosao.Play();
 
-            // Chance de dropar item
             if (Random.Range(0, 100) <= chanceDeDroparItem)
             {
                 Instantiate(itemDropado, transform.position, Quaternion.identity);
@@ -60,13 +66,12 @@ public class LixoEspacial : MonoBehaviour
         }
     }
 
-    // Método privado para instanciar a explosão na frente do lixo
     private void CriarExplosao()
     {
         if (impactoDoLixo == null) return;
 
         GameObject explosao = Instantiate(impactoDoLixo, transform.position, transform.rotation);
         SpriteRenderer sr = explosao.GetComponent<SpriteRenderer>();
-        if (sr != null) sr.sortingOrder = 1; // Garante que a explosão fique na frente do lixo
+        if (sr != null) sr.sortingOrder = 1;
     }
 }
