@@ -50,8 +50,8 @@ public class ControleDoJogador : MonoBehaviour // Classe que controla o jogador 
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            corAtual = Color.blue;
-            Debug.Log("Cor do laser alterada para: Azul");
+            corAtual = Color.yellow; // Alterado de azul para amarelo
+            Debug.Log("Cor do laser alterada para: Amarelo");
         }
 
         // Troca de cor via joystick (A, B, X)
@@ -67,8 +67,8 @@ public class ControleDoJogador : MonoBehaviour // Classe que controla o jogador 
         }
         if (Input.GetButtonDown("Jump")) // X
         {
-            corAtual = Color.blue;
-            Debug.Log("Cor do laser alterada via controle: Azul");
+            corAtual = Color.yellow; // Alterado de azul para amarelo
+            Debug.Log("Cor do laser alterada via controle: Amarelo");
         }
     }
 

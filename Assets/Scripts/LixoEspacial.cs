@@ -21,8 +21,8 @@ public class LixoEspacial : MonoBehaviour
     {
         vidaAtualDoLixo = vidaMaximaDoLixo;
 
-        // Define cor aleatória entre vermelho, verde ou azul
-        Color[] coresDisponiveis = { Color.red, Color.green, Color.blue };
+        // Define cor aleatória entre vermelho, verde ou amarelo
+        Color[] coresDisponiveis = { Color.red, Color.green, Color.yellow }; // Alterado de azul para amarelo
         corDoLixo = coresDisponiveis[Random.Range(0, coresDisponiveis.Length)];
 
         // Aplica a cor no sprite do inimigo
@@ -79,4 +79,3 @@ public class LixoEspacial : MonoBehaviour
         if (sr != null) sr.sortingOrder = 1;
     }
 }
-

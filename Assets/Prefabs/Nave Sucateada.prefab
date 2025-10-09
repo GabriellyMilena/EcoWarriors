@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ac131a47f564345a1aa1ff32b32098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadeDoLixo: 10
+  velocidadeDoLixo: 8
   vidaMaximaDoLixo: 20
   vidaAtualDoLixo: 0
   pontosPorLixo: 15
