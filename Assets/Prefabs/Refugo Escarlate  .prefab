@@ -246,11 +246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ac131a47f564345a1aa1ff32b32098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactoDoLixo: {fileID: 5100528553922600576, guid: 887c7cc41a3da574d9ea99d30a7550f6, type: 3}
   velocidadeDoLixo: 7
-  itemDropado: {fileID: 3232363289026165087, guid: 83cbbce36e14f7346ad69307ee0db2c6, type: 3}
-  chanceDeDroparItem: 10
   vidaMaximaDoLixo: 5
   vidaAtualDoLixo: 0
   pontosPorLixo: 10
   danoCausado: 4
+  corDoLixo: {r: 1, g: 1, b: 1, a: 1}
+  impactoDoLixo: {fileID: 5100528553922600576, guid: 887c7cc41a3da574d9ea99d30a7550f6, type: 3}
+  itemDropado: {fileID: 3232363289026165087, guid: 83cbbce36e14f7346ad69307ee0db2c6, type: 3}
+  chanceDeDroparItem: 10

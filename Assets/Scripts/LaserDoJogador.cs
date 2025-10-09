@@ -1,7 +1,6 @@
 using UnityEngine;
 using VolumetricLines;
 
-
 public class LaserDoJogador : MonoBehaviour
 {
     [Header("Propriedades de Movimento")]
@@ -13,12 +12,12 @@ public class LaserDoJogador : MonoBehaviour
 
     [Header("Componentes Internos")]
     private SpriteRenderer rend; 
-    private VolumetricLineBehavior volumetricLine; // 👈 compatibilidade com seu prefab
+    private VolumetricLineBehavior volumetricLine; // Compatibilidade com seu prefab
 
     void Awake()
     {
         rend = GetComponent<SpriteRenderer>();
-        volumetricLine = GetComponent<VolumetricLineBehavior>(); // 👈 tenta encontrar o componente do laser 3D
+        volumetricLine = GetComponent<VolumetricLineBehavior>();
 
         if (rend == null && volumetricLine == null)
         {
@@ -45,17 +44,29 @@ public class LaserDoJogador : MonoBehaviour
             var lixo = other.GetComponent<LixoEspacial>();
             if (lixo != null)
             {
-                lixo.MachucarLixo(danoCausado);
-            }
+                // Captura a cor do laser
+                Color corDoLaser = Color.white;
 
-            if (impactoDoLaser != null)
-            {
-                Instantiate(impactoDoLaser, transform.position, transform.rotation);
-            }
+                if (rend != null && rend.material != null)
+                    corDoLaser = rend.material.color;
+                else if (volumetricLine != null)
+                    corDoLaser = volumetricLine.LineColor;
 
-            if (EfeitosSonoros.instancia?.somDeImpacto != null)
-            {
-                EfeitosSonoros.instancia.somDeImpacto.Play();
+                // Só causa dano se a cor do laser corresponder à do lixo
+                if (corDoLaser == lixo.corDoLixo)
+                {
+                    lixo.MachucarLixo(danoCausado);
+
+                    if (impactoDoLaser != null)
+                        Instantiate(impactoDoLaser, transform.position, transform.rotation);
+
+                    if (EfeitosSonoros.instancia?.somDeImpacto != null)
+                        EfeitosSonoros.instancia.somDeImpacto.Play();
+                }
+                else
+                {
+                    Debug.Log("Laser não corresponde à cor do lixo. Sem dano.");
+                }
             }
 
             Destroy(gameObject);
@@ -72,7 +83,7 @@ public class LaserDoJogador : MonoBehaviour
 
         if (volumetricLine != null)
         {
-            volumetricLine.LineColor = cor; // 👈 o campo correto para alterar cor no laser volumétrico
+            volumetricLine.LineColor = cor;
         }
 
         Debug.Log("Cor do laser aplicada visualmente: " + cor);

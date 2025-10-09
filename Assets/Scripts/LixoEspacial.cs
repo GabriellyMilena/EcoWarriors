@@ -10,7 +10,7 @@ public class LixoEspacial : MonoBehaviour
     public int danoCausado;
 
     [Header("Sistema Cromático")]
-    public Color corDoLixo = Color.white; // 🔹 Adicionado
+    public Color corDoLixo = Color.white; // 🔹 Cor padrão, será sobrescrita aleatoriamente
 
     [Header("Itens e Efeitos")]
     public GameObject impactoDoLixo;
@@ -20,6 +20,10 @@ public class LixoEspacial : MonoBehaviour
     void Start()
     {
         vidaAtualDoLixo = vidaMaximaDoLixo;
+
+        // Define cor aleatória entre vermelho, verde ou azul
+        Color[] coresDisponiveis = { Color.red, Color.green, Color.blue };
+        corDoLixo = coresDisponiveis[Random.Range(0, coresDisponiveis.Length)];
 
         // Aplica a cor no sprite do inimigo
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -75,3 +79,4 @@ public class LixoEspacial : MonoBehaviour
         if (sr != null) sr.sortingOrder = 1;
     }
 }
+
