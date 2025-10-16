@@ -4,22 +4,14 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instancia;
-
-    [Header("Áudio")]
     public AudioSource musicaDeFundo;
     public AudioSource musicaDeGameOver;
-
-    [Header("Pontuação")]
     public Text textoDePontuacao;      
     public int PontuacaoAtual;
-
-    [Header("Game Over")]
     public GameObject painelDeGameOver;
     public Text textoDeGameOver;      
     public Text textoDePontuacaoFinal;
     public Text textoDeHighScore;
-
-    [Header("Player")]
     public GameObject jogador;
 
     void Awake()

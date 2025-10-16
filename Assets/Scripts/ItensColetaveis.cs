@@ -10,11 +10,9 @@ public class ItensColetaveis : MonoBehaviour
         {
             if (itemEscudo)
             {
-                // Ativa escudo no jogador
                 other.GetComponent<VidaDoJogador>().AtivarEscudo();
             }
 
-            // Destroi o item após coletar
             Destroy(gameObject);
         }
     }

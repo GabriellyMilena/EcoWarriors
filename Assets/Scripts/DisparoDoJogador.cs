@@ -8,7 +8,6 @@ public class DisparoDoJogador : MonoBehaviour
 
     void Update()
     {
-        // Disparo com botão do controle ou espaço
         if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space))
         {
             if (prefabLaser == null)

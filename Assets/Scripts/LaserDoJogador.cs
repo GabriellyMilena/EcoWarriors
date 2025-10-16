@@ -3,16 +3,12 @@ using VolumetricLines;
 
 public class LaserDoJogador : MonoBehaviour
 {
-    [Header("Propriedades de Movimento")]
-    public float velocidadeDoLaser = 10f;
 
-    [Header("Propriedades de Combate")]
+    public float velocidadeDoLaser = 10f;
     public int danoCausado = 1;
     public GameObject impactoDoLaser;
-
-    [Header("Componentes Internos")]
     private SpriteRenderer rend; 
-    private VolumetricLineBehavior volumetricLine; // Compatibilidade com seu prefab
+    private VolumetricLineBehavior volumetricLine;
 
     void Awake()
     {
@@ -27,10 +23,8 @@ public class LaserDoJogador : MonoBehaviour
 
     void Update()
     {
-        // Movimento contínuo do laser
         transform.Translate(Vector3.up * velocidadeDoLaser * Time.deltaTime);
 
-        // Destruição automática fora da tela
         if (transform.position.y > Camera.main.orthographicSize * 1.5f)
         {
             Destroy(gameObject);
@@ -44,15 +38,12 @@ public class LaserDoJogador : MonoBehaviour
             var lixo = other.GetComponent<LixoEspacial>();
             if (lixo != null)
             {
-                // Captura a cor do laser
                 Color corDoLaser = Color.white;
 
                 if (rend != null && rend.material != null)
                     corDoLaser = rend.material.color;
                 else if (volumetricLine != null)
                     corDoLaser = volumetricLine.LineColor;
-
-                // Só causa dano se a cor do laser corresponder à do lixo
                 if (corDoLaser == lixo.corDoLixo)
                 {
                     lixo.MachucarLixo(danoCausado);
@@ -72,8 +63,6 @@ public class LaserDoJogador : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    // ✅ Compatível com SpriteRenderer e VolumetricLineBehavior
     public void DefinirCor(Color cor)
     {
         if (rend != null && rend.material != null)

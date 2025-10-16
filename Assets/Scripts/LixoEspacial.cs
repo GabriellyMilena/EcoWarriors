@@ -2,17 +2,12 @@ using UnityEngine;
 
 public class LixoEspacial : MonoBehaviour
 {
-    [Header("Configurações do Lixo")]
     public float velocidadeDoLixo;
     public int vidaMaximaDoLixo;
     public int vidaAtualDoLixo;
     public int pontosPorLixo;
     public int danoCausado;
-
-    [Header("Sistema Cromático")]
-    public Color corDoLixo = Color.white; // 🔹 Cor padrão, será sobrescrita aleatoriamente
-
-    [Header("Itens e Efeitos")]
+    public Color corDoLixo = Color.white; 
     public GameObject impactoDoLixo;
     public GameObject itemDropado;
     public int chanceDeDroparItem;
@@ -21,11 +16,9 @@ public class LixoEspacial : MonoBehaviour
     {
         vidaAtualDoLixo = vidaMaximaDoLixo;
 
-        // Define cor aleatória entre vermelho, verde ou amarelo
-        Color[] coresDisponiveis = { Color.red, Color.green, Color.yellow }; // Alterado de azul para amarelo
+        Color[] coresDisponiveis = { Color.red, Color.green, Color.yellow };
         corDoLixo = coresDisponiveis[Random.Range(0, coresDisponiveis.Length)];
 
-        // Aplica a cor no sprite do inimigo
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (sr != null)
             sr.color = corDoLixo;

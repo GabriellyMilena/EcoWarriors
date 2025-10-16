@@ -3,28 +3,21 @@ using UnityEngine.UI;
 
 public class VidaDoJogador : MonoBehaviour
 {
-    [Header("UI")]
+
     public Slider barraDeVida;
     public Slider barraDeEscudo;
-
-    [Header("Escudo")]
     public GameObject escudoDoJogador;
     public int vidaMaximaDoEscudo;
     private int vidaAtualDoEscudo;
     private bool temEscudo = false;
-
-    [Header("Jogador")]
     public int vidaMaximaDoJogador;
     private int vidaAtualDoJogador;
 
     void Start()
     {
-        // Inicializa vida
         vidaAtualDoJogador = vidaMaximaDoJogador;
         barraDeVida.maxValue = vidaMaximaDoJogador;
         barraDeVida.value = vidaAtualDoJogador;
-
-        // Inicializa escudo vazio (sem escudo no começo)
         barraDeEscudo.maxValue = vidaMaximaDoEscudo;
         vidaAtualDoEscudo = 0;
         barraDeEscudo.value = 0;

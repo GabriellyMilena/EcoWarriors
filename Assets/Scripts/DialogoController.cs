@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem; // Novo Input System
+using UnityEngine.InputSystem;
 
 public class DialogoController : MonoBehaviour
 {
@@ -32,12 +32,10 @@ public class DialogoController : MonoBehaviour
     void Update()
     {
         var gamepad = Gamepad.current;
-        if (gamepad != null && gamepad.buttonSouth.wasPressedThisFrame) // X no PlayStation / A no Xbox
+        if (gamepad != null && gamepad.buttonSouth.wasPressedThisFrame)
         {
             ProximoDialogo();
         }
-
-        // Para quem estiver testando no PC sem controle:
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ProximoDialogo();
@@ -53,7 +51,7 @@ public class DialogoController : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Jogo"); // Vai para a cena do jogo
+            SceneManager.LoadScene("Jogo");
         }
     }
 }
