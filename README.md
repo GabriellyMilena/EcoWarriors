@@ -9,7 +9,7 @@ O jogo tem como missão **proteger a Terra contra lixos espaciais**, ilustrando 
 - Controle da nave para destruir lixos espaciais antes que atinjam a Terra.  
 - Sistema de pontuação baseado na quantidade de lixos destruídos.  
 - Diferentes tipos de lixos, representando ameaças variadas.  
-- **Suporte a teclado e controle de videogame**, garantindo acessibilidade.  
+- **Suporte a celular e controle de videogame**, garantindo acessibilidade.  
 - Feedback visual durante acertos.  
 
 ## 🛠️ Tecnologias Utilizadas
